@@ -1,0 +1,17 @@
+#cloud-config
+groups:
+  - ansible
+  - ubuntu
+users:
+- name: ubuntu
+  primary_group: ubuntu
+  shell: /bin/bash
+  sudo: 'ALL=(ALL) NOPASSWD:ALL'
+  ssh-authorized-keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDUlx6IytT70QatR7DnUeSCSQIkIkrioMfAFJQiXyk/2A5OOaSH1GC0SnkzB70xrrwHWT/aM5pjlCjtXWgjldJIIqtvdgnvdvyi7u8z2sMEmeQzQVfILxIlS2RlasqmOxXww7njSdWlGUjT+PVJ16nMaKZqCNNpdfPcESdE5pQJd8lr1GHiEvWnDO3bywxg0K11+qtTdjUP2c7SS0AxUwEmLEu5JuamKwVtPG6c4cKxjEVjEbu86e9TdL13HGGvsu8skBkTTYEGhLR7OyQ+hpmJexpvS/vG59RgaWlkY2UD/0UXgSLnDerBXPD2YIX9bJJpnRmoSp16QazcT7F/QF/A6GHdPEBb4kcz6oAZH1s+SCTRYgaRhmmO1ZA08LWWfQvcomu6uqdgecl9CgLXw4JcrVYF9Fhdj541hK/zE4JIjOLXSDHhnOPNEmhi1KZF7GFzgQpuVGa4gDl4lEbUQTMWWEl3tJ0ubNQJm+RzDR8z7VONJj/vxWPJIaBYSMOoors= student@fhmj8rd6ufli03s92r6r
+- name: ansible
+  primary_group: ansible
+  shell: /bin/bash
+  sudo: 'ALL=(ALL) NOPASSWD:ALL'
+  ssh-authorized-keys:
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDUlx6IytT70QatR7DnUeSCSQIkIkrioMfAFJQiXyk/2A5OOaSH1GC0SnkzB70xrrwHWT/aM5pjlCjtXWgjldJIIqtvdgnvdvyi7u8z2sMEmeQzQVfILxIlS2RlasqmOxXww7njSdWlGUjT+PVJ16nMaKZqCNNpdfPcESdE5pQJd8lr1GHiEvWnDO3bywxg0K11+qtTdjUP2c7SS0AxUwEmLEu5JuamKwVtPG6c4cKxjEVjEbu86e9TdL13HGGvsu8skBkTTYEGhLR7OyQ+hpmJexpvS/vG59RgaWlkY2UD/0UXgSLnDerBXPD2YIX9bJJpnRmoSp16QazcT7F/QF/A6GHdPEBb4kcz6oAZH1s+SCTRYgaRhmmO1ZA08LWWfQvcomu6uqdgecl9CgLXw4JcrVYF9Fhdj541hK/zE4JIjOLXSDHhnOPNEmhi1KZF7GFzgQpuVGa4gDl4lEbUQTMWWEl3tJ0ubNQJm+RzDR8z7VONJj/vxWPJIaBYSMOoors= student@fhmj8rd6ufli03s92r6r
