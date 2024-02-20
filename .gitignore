@@ -1,1 +1,12 @@
 .idea
+terraform/.terraform
+terraform/.terraform.lock.hcl
+secret.*
+*.tfstate
+*.tfstate.*
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
