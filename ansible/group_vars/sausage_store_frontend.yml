@@ -1,0 +1,5 @@
+frontend_version: "1.0.1065799"
+frontend_service_user: "www-data"
+frontend_directory: /var/www-data
+
+nexus_frontend_repository_path: repository/std-025-75-frontend

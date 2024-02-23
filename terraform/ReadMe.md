@@ -25,9 +25,9 @@ create-token`) и полученный токен запишите в перем
 В параметрах запуска указываем файл с ключами для подключения к хранилищу
 `terraform init -backend-config=secret.backend.auto.tfvars`
 
-### Запуск terraform plan/init
+### Запуск terraform plan/apply
 
 Перед запуском необходимо создать файл `./terraform/secret.provider.auto.tfvars` и задать в нём значение для 
 переменной `token`. В этой переменной должен хранится токен для доступа к облаку.
 
-`terraform init -auto-approve`
+`terraform apply -auto-approve`
