@@ -1,12 +1,13 @@
-- name: Download script before install nodejs
-  get_url:
-    url: "https://deb.nodesource.com/setup_16.x"
-    dest: "/tmp/nodejs_16_setup.sh"
-    mode: "755"
-
-- name: Run script before install nodejs
+- name: Install the gpg key for nodejs
   become: yes
-  command: "bash /tmp/nodejs_16_setup.sh"
+  apt_key:
+    url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+
+- name: Add repository Node.js
+  become: yes
+  apt_repository:
+    repo: deb https://deb.nodesource.com/node_16.x {{ ansible_distribution_release }} main
+    update_cache: yes
 
 - name: Install NodeJs
   become: yes

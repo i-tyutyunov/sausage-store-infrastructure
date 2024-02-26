@@ -21,20 +21,9 @@
 
 ## Ansible
 
-### Организация доступа к Nuxus
-
-1. Создаём файл `ansible/secret.yml`;
-2. Объявляем в файле, из п.1, переменные для доступа к Nexus:
-   _даю свои доступы для простоты проверки задания_
-```yaml
-nexus_login: admin
-nexus_password: JN2-7ce-yZ8-bvz
-```
-
 ### Запуск
-_Перед запуском нужно выяснить IP виртуальной машины, которую создал Terraform. Полученный ip нужно передать в 
-переменную `mv_sausage_store_ip` при запуске `ansible-playbook`_
+_Перед запуском нужно выяснить IP виртуальной машины, которую создал Terraform. Полученный ip нужно передать в `ansible/inventory.yaml`_
 
 ```shell
-ansible-playbook playbook.yaml -e "@secret.yml" -e "mv_sausage_store_ip=<ip>"
+ ansible-playbook playbook.yaml -e "@nexus_access_data.yml" --vault-password-file=vault_password
 ```

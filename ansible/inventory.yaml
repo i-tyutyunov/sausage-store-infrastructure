@@ -3,8 +3,8 @@ all:
     sausage_store_backend:
       hosts:
         backend:
-          ansible_host: "{{ mv_sausage_store_ip }}"
+          ansible_host: 51.250.92.176
     sausage_store_frontend:
       hosts:
         frontend:
-          ansible_host: "{{ mv_sausage_store_ip }}"
+          ansible_host: 51.250.92.176

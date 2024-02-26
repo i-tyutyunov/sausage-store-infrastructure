@@ -11,15 +11,8 @@ Ansible скачивает артефакты приложения из Nexus.
 1. `nexus_login`
 2. `nexus_password`
 
+Эти переменные уже есть в файле `ansible/nexus_access_data.yml` в зашифрованном виде.
 
-Эти переменные можно записать в файл `secret.yml`
-
-_**PS:** напишу тут доступы от Nexus для упрощения процесса проверки задания.
-Само собой я понимаю, что в реальном проекте хранить доступы в репозитории - **недопустимо**._
-```yaml
-nexus_login: admin
-nexus_password: JN2-7ce-yZ8-bvz
-```
 
 С помощью переменных:
 1. `nexus_backend_repository_path`
@@ -35,7 +28,7 @@ nexus_password: JN2-7ce-yZ8-bvz
 ### Задать IP адрес ВМ к которой будет подключаться ansible
 
 Перед тем, как запускать ansible-playbook, необходимо выяснить IP-адрес ВМ на которой будет работать приложение.
-IP адрес должен быть задать в переменной `mv_sausage_store_ip`.
+IP адрес должен быть задать в `ansible/inventory.yaml`.
 
 ## Запуск
-ansible-playbook playbook.yaml -e "@secret.yml" -e "mv_sausage_store_ip=178.154.207.241"
+ansible-playbook playbook.yaml -e "@nexus_access_data.yml" --vault-password-file=vault_password
