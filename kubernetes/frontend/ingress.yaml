@@ -1,0 +1,22 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - "tyutyunov-igor-025.k8s.praktikum-services.tech"
+  rules:
+    - host: "tyutyunov-igor-025.k8s.praktikum-services.tech"
+      http:
+        - paths:
+            - path: /
+              backend:
+                service:
+                  name: frontend
+                  port:
+                    number: 80
+              pathType: Prefix
+
