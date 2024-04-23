@@ -1,4 +1,3 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -11,12 +10,11 @@ spec:
   rules:
     - host: "tyutyunov-igor-025.k8s.praktikum-services.tech"
       http:
-        - paths:
-            - path: /
-              backend:
-                service:
-                  name: frontend
-                  port:
-                    number: 80
-              pathType: Prefix
-
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80

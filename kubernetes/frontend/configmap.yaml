@@ -6,13 +6,10 @@ metadata:
 data:
   nginx.conf: |
     server {
-      listen 8080;
+      listen 80;
       location / {
-        root   /usr/share/nginx/html;
+        root   /app/frontend;
         index  index.html;
         try_files $uri $uri/ /index.html;
-      }
-      location /api {
-          proxy_pass http://sausage-store-backend:8080;
       }
     }
