@@ -30,4 +30,4 @@ deploy:
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/backend
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/backend-report
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/frontend
-    - ssh $ENV_USER@$ENV_HOST rm /home/$ENV_USER/.kube/config
+    - ssh $ENV_USER@$ENV_HOST rm -rf /home/$ENV_USER/kubernetes
