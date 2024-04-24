@@ -19,6 +19,8 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
     - command -v envsubst >/dev/null || ( apt-get update -y && apt-get install gettext-base -y )
     - scp $KUBE_CONFIG $ENV_USER@$ENV_HOST:~/.kube/config
+    - envsubst < ./kubernetes/backend/deployment.yaml > ./kubernetes/backend/deployment.yaml
+    - envsubst < ./kubernetes/backend-report/deployment.yaml > ./kubernetes/backend-report/deployment.yaml
     - scp -rC ./kubernetes $ENV_USER@$ENV_HOST:~/kubernetes
   script:
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/backend

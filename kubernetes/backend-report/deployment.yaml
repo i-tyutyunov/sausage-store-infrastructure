@@ -22,6 +22,6 @@ spec:
               containerPort: 80
           env:
             - name: SPRING_DATA_MONGODB_URI
-              value: "mongodb://std-025-75:Testusr1234@rc1d-373rb11d8uq2e4b5.mdb.yandexcloud.net:27018/std-025-75?tls=true"
+              value: $SPRING_DATA_MONGODB_URI
       imagePullSecrets:
         - name: docker-config-secret

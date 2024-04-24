@@ -22,13 +22,13 @@ spec:
               containerPort: 80
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://rc1d-37jmsli3qkokbf7v.mdb.yandexcloud.net:6432/std-025-75"
+              value: $SPRING_DATASOURCE_URL
             - name: SPRING_DATASOURCE_USERNAME
-              value: std-025-75
+              value: $SPRING_DATASOURCE_USERNAME
             - name: SPRING_DATASOURCE_PASSWORD
-              value: Testusr1234
+              value: $SPRING_DATASOURCE_USERNAME
             - name: SPRING_DATA_MONGODB_URI
-              value: "mongodb://std-025-75:Testusr1234@rc1d-373rb11d8uq2e4b5.mdb.yandexcloud.net:27018/std-025-75?tls=true"
+              value: $SPRING_DATA_MONGODB_URI
             - name: REPORT_PATH
               value: "/var/sausage-store/reports/"
       imagePullSecrets:
