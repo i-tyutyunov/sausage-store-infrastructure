@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-report
+  labels:
+    app: backend-report
+spec:
+  selector:
+    matchLabels:
+      app: backend-report
+  template:
+    metadata:
+      labels:
+        app: backend-report
+    spec:
+      containers:
+        - name: backend-report
+          image: "gitlab.praktikum-services.ru:5050/std-025-75/sausage-store/sausage-backend-report:latest"
+          ports:
+            - name: backend-report
+              containerPort: 8080
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              value: $SPRING_DATA_MONGODB_URI
+      imagePullSecrets:
+        - name: docker-config-secret
