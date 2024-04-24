@@ -25,7 +25,7 @@ deploy:
     - cat ./backend__report_deployment_tmp.yaml > ./kubernetes/backend-report/deployment.yaml
     - scp -rC ./kubernetes $ENV_USER@$ENV_HOST:~/kubernetes
     - ssh $ENV_USER@$ENV_HOST kubectl delete secret docker-config-secret --ignore-not-found=true
-    - ssh $ENV_USER@$ENV_HOST kubectl create secret docker-registry docker-config-secret --docker-server=${CI_REGISTRY} --docker-username=${CI_REGISTRY_USER} --docker-password=${CI_REGISTRY_PASSWORD}
+    - ssh $ENV_USER@$ENV_HOST kubectl create secret docker-registry docker-config-secret --docker-server=${CI_REGISTRY} --docker-username=std-025-75 --docker-password=7q2g4NSw
   script:
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/backend
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/backend-report
