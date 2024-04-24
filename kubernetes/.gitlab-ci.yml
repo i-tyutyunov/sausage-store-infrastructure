@@ -21,13 +21,12 @@ deploy:
     - scp $KUBE_CONFIG $ENV_USER@$ENV_HOST:~/.kube/config
     - envsubst < ./kubernetes/backend/deployment.yaml > ./kubernetes/backend/deployment.yaml
     - envsubst < ./kubernetes/backend-report/deployment.yaml > ./kubernetes/backend-report/deployment.yaml
-    - envsubst < ./kubernetes/secrets.yaml > ./kubernetes/secrets.yaml
     - scp -rC ./kubernetes $ENV_USER@$ENV_HOST:~/kubernetes
-    - echo "${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}" > test.txt
-    - scp -rC ./test.txt $ENV_USER@$ENV_HOST:~/kubernetes/test.txt
+    - ssh $ENV_USER@$ENV_HOST kubectl create secret docker-registry docker-config-secret --docker-server=${CI_REGISTRY} --docker-username=${CI_REGISTRY_USER} --docker-password=${CI_REGISTRY_PASSWORD} --overwrite
   script:
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/backend
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/backend-report
     - ssh $ENV_USER@$ENV_HOST kubectl apply -f /home/$ENV_USER/kubernetes/frontend
     - ssh $ENV_USER@$ENV_HOST rm /home/$ENV_USER/.kube/config
+    - ssh $ENV_USER@$ENV_HOST rm -rf /home/$ENV_USER/kubernetes
 
