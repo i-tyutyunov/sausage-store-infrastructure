@@ -12,13 +12,8 @@ deploy:
     - when: manual
   before_script:
     - export KUBECONFIG=$KUBE_CONFIG
-    - kubectl get pods
-    - command -v envsubst >/dev/null || ( apt-get update -y && apt-get install gettext-base -y )
-    - envsubst < ./kubernetes/backend/deployment.yaml > ./backend_deployment_tmp.yaml
-    - cat ./backend_deployment_tmp.yaml > ./kubernetes/backend/deployment.yaml
-    - envsubst < ./kubernetes/backend-report/deployment.yaml > ./backend__report_deployment_tmp.yaml
-    - cat ./backend__report_deployment_tmp.yaml > ./kubernetes/backend-report/deployment.yaml
   script:
+    - kubectl apply -f kubernetes/secrets.yaml
     - kubectl apply -f kubernetes/backend
     - kubectl apply -f kubernetes/backend-report
     - kubectl apply -f kubernetes/frontend

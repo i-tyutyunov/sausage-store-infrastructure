@@ -22,6 +22,9 @@ spec:
               containerPort: 8080
           env:
             - name: SPRING_DATA_MONGODB_URI
-              value: $SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: ss-secrets
+                  key: SPRING_DATA_MONGODB_URI
       imagePullSecrets:
         - name: docker-config-secret
