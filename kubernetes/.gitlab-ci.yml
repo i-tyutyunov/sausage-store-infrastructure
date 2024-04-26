@@ -1,0 +1,20 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+  environment:
+    name: sausage-store
+    url: https://tyutyunov-igor-025.k8s.praktikum-services.tech
+  rules:
+    - when: manual
+  before_script:
+    - export KUBECONFIG=$KUBE_CONFIG
+  script:
+    - kubectl apply -f $SECRETS
+    - kubectl apply -f kubernetes/backend
+    - kubectl apply -f kubernetes/backend-report
+    - kubectl apply -f kubernetes/frontend
+
