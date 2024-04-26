@@ -6,6 +6,7 @@ metadata:
   labels:
     app: backend-report
 spec:
+  revisionHistoryLimit: 12
   selector:
     matchLabels:
       app: backend-report
@@ -14,6 +15,16 @@ spec:
       labels:
         app: backend-report
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 80
+              preference:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - backend-report
       containers:
         - name: backend-report
           image: "gitlab.praktikum-services.ru:5050/std-025-75/sausage-store/sausage-backend-report:latest"
@@ -26,5 +37,7 @@ spec:
                 secretKeyRef:
                   name: ss-secrets
                   key: SPRING_DATA_MONGODB_URI
+            - name: PORT
+              value: "8080"
       imagePullSecrets:
         - name: docker-config-secret
