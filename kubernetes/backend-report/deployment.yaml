@@ -16,15 +16,15 @@ spec:
         app: backend-report
     spec:
       affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 80
+              preference:
                 matchExpressions:
                   - key: app
                     operator: In
                     values:
                       - backend-report
-              topologyKey: kubernetes.io/hostname
       containers:
         - name: backend-report
           image: "gitlab.praktikum-services.ru:5050/std-025-75/sausage-store/sausage-backend-report:latest"
