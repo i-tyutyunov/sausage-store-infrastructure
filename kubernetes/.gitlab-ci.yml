@@ -10,6 +10,17 @@ deploy:
     url: https://tyutyunov-igor-025.k8s.praktikum-services.tech
   rules:
     - when: manual
-  script:
+  before_script:
     - export KUBECONFIG=$KUBE_CONFIG
-    - kubectl config get-contexts
+    - kubectl get secret docker-config-secret
+    - kubectl get pods
+    - command -v envsubst >/dev/null || ( apt-get update -y && apt-get install gettext-base -y )
+    - envsubst < ./kubernetes/backend/deployment.yaml > ./backend_deployment_tmp.yaml
+    - cat ./backend_deployment_tmp.yaml > ./kubernetes/backend/deployment.yaml
+    - envsubst < ./kubernetes/backend-report/deployment.yaml > ./backend__report_deployment_tmp.yaml
+    - cat ./backend__report_deployment_tmp.yaml > ./kubernetes/backend-report/deployment.yaml
+  script:
+    - kubectl apply -f /home/$ENV_USER/kubernetes/backend
+    - kubectl apply -f /home/$ENV_USER/kubernetes/backend-report
+    - kubectl apply -f /home/$ENV_USER/kubernetes/frontend
+
