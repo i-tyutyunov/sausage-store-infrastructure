@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-report-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: backend-report
+spec:
+  revisionHistoryLimit: 12
+  selector:
+    matchLabels:
+      app: backend-report
+  template:
+    metadata:
+      labels:
+        app: backend-report
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 80
+              preference:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - backend-report
+      containers:
+        - name: backend-report
+          image: "gitlab.praktikum-services.ru:5050/std-025-75/sausage-store/sausage-backend-report:latest"
+          ports:
+            - name: backend-report
+              containerPort: 8080
+          env:
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: ss-secrets
+                  key: SPRING_DATA_MONGODB_URI
+            - name: PORT
+              value: "8080"
+      imagePullSecrets:
+        - name: docker-config-secret
