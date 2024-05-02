@@ -1,0 +1,9 @@
+backend:
+  image: "gitlab.praktikum-services.ru:5050/std-025-75/sausage-store/sausage-backend:latest"
+
+backend_report:
+  minReplicas: 2
+
+
+frontend:
+  domain: "tyutyunov-igor-025.k8s.praktikum-services.tech"
