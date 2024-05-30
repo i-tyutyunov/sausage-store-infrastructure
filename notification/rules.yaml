@@ -1,0 +1,40 @@
+groups:
+  - name: Sausage store rules
+    rules:
+      - alert: InstanceDown
+        expr: up{app="backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          project: "sausage_store"
+          component: "Backend"
+        annotations:
+          summary: "Backend недоступен"
+          description: "Backend недоступен"
+
+      - alert: Http500Error
+        expr: increase(http_server_requests_seconds_count{status="500"}[5m]) > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Оповещения о запросах с кодом ошибки 500"
+          description: "За последние 5 минут возникли ошибки HTTP 500."
+
+      - alert: HighLatencyPostRequests
+        expr: histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{method="POST", uri="/api/orders"}[5m])) by (le)) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Оповещения для успешных POST-запросов к /api/orders"
+          description: "Задержки более 100ms для 95 перцентиля в течение 5 минут;"
+
+      - alert: ActuatorPrometheusError
+        expr: increase(http_server_requests_seconds_bucket{uri="/actuator/prometheus", status!~"2.."}[2m]) > 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Оповещения для /actuator/prometheus с любым кодом ошибки"
+          description: "Оповещения для /actuator/prometheus с любым кодом ошибки за временной промежуток в 2 минуты;"
