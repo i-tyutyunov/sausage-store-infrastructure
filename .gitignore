@@ -1,7 +1,6 @@
 .idea
 terraform/.terraform
 terraform/.terraform.lock.hcl
-secret.*
 *.tfstate
 *.tfstate.*
 override.tf
@@ -10,5 +9,3 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
-ansible/vault_password
-kubernetes/ss-secrets.yml
